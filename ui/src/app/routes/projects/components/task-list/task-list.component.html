@@ -1,0 +1,81 @@
+<div
+  class="task-header"
+  #headerElement
+>
+  <pts-task-header
+    [project]="project"
+    [subProject]="subProject"
+    [feature]="feature"
+    [users]="users"
+    [pageReport]="pageReport"
+    [instance]="task"
+    (edit)="onEdit($event)"
+    (archive)="onArchive($event)"
+    (move)="onMove($event)"
+    (add)="onAdd($event)"
+    (changesLog)="onChangesLog($event)"
+  ></pts-task-header>
+</div>
+
+<div
+  class="reports"
+  [style.height]="centralElHeight"
+>
+  <div #centralElement>
+    <div
+      *ngFor="let report of pageReport?.content"
+      class="report-item-container"
+    >
+      <div class="divider"></div>
+
+      <div class="report-item">
+
+        <div class="report-item-author">
+          <div class="author-name">{{getUserNameByEmail(report.reporterEmail)}}</div>
+          <div class="report-time">{{getFormatDate(report.reportedDate)}}</div>
+          <div class="report-estimated-time">{{report.hours}} hrs</div>
+        </div>
+
+        <div class="report-item-text">
+          <div class="report-text">{{report.comment}}</div>
+          <div
+            ptsProgress
+            [percentage]="report.percentage"
+            matTooltip="{{report.percentage}}&#37; completed"
+            matTooltipPosition="above"
+            matTooltipClass="table-tooltip"
+          >
+            <svg height="6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect height="6" rx="3" fill="white"></rect>
+              <rect height="6" rx="3" fill="#EF0D33"></rect>
+            </svg>
+          </div>
+        </div>
+
+        <div class="report-item-actions">
+          <div
+            class="edit-report"
+            (click)="editReport(report)"
+          ></div>
+          <div
+            class="delete-report"
+            (click)="deleteReport(report)"
+          ></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div
+  class="paginator-container"
+  #footerElement
+>
+  <pts-paginator
+    *ngIf="totalPages"
+    [total]="totalPages"
+    (nextPage)="updateCurrentPage($event)"
+  ></pts-paginator>
+</div>

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: registry-service
+  cloud:
+    config:
+      uri: http://config-service:8888
+      fail-fast: true
+      retry:
+        maxAttempts: 20

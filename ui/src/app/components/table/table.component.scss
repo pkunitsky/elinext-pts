@@ -1,0 +1,245 @@
+@import '../../shared/styles/config';
+
+.app-table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.app-table-row {
+  padding: 0;
+
+  .table-row-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+
+  .table-back-icon {
+    @include action-row-icons;
+  }
+
+  .table-recycler-icon {
+    @include action-row-icons;
+    padding-right: 18px;
+  }
+
+  &:hover {
+    background: $light-background-color url(/assets/svg/checked_mark.svg) no-repeat left;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+    .table-back-icon {
+      background: url(/assets/svg/back_arrow.svg) no-repeat center;
+    }
+
+    .table-recycler-icon {
+      background: url(/assets/svg/recycler.svg) no-repeat center;
+    }
+  }
+}
+
+.table-row-selected {
+  background: $light-background-color;
+}
+
+.app-table-cell {
+  width: 50px;
+  height: 27px;
+
+  .app-table-checkbox {
+    padding-left: 16px;
+    position: relative;
+    top: -3px;
+  }
+}
+
+.table-general-row {
+  height: 41px;
+}
+
+.table-data-cell {
+  position: relative;
+  overflow: hidden;
+  max-width: 300px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 25px;
+
+  .table-feature {
+    font-weight: bold;
+    padding-right: 5px;
+  }
+
+  .table-elements-nested-line {
+    position: absolute;
+    top: -14px;
+    left: 6px;
+    display: block;
+    width: 12px;
+    height: 61px;
+    background: url(/assets/svg/child_marks.svg) no-repeat center;
+  }
+
+  .table-elements-nested-line-last {
+    position: absolute;
+    left: 6px;
+    display: block;
+    width: 12px;
+    height: 21px;
+    top: -4px;
+    background: url(/assets/svg/child_mark.svg) no-repeat center;
+  }
+}
+
+.table-header-row {
+  height: 70px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+}
+
+.table-header-select {
+  padding: 11px 0 41px 0;
+  background: $light-background-color;
+  cursor: pointer;
+}
+
+.table-header-cell {
+  border-right: 1px solid $table-nested-element-line-color;
+  background: $light-background-color;
+}
+
+.up-arrow {
+  @include sorting-icons;
+  background: url(/assets/svg/sort_up_arrow_dark.svg) no-repeat center;
+}
+
+.down-arrow {
+  @include sorting-icons;
+  background: url(/assets/svg/sort_down_arrow_dark.svg) no-repeat center;
+}
+
+.up-arrow-active {
+  @include sorting-icons;
+  background: url(/assets/svg/sort_up_arrow.svg) no-repeat center;
+}
+
+.down-arrow-active {
+  @include sorting-icons;
+  background: url(/assets/svg/sort_down_arrow.svg) no-repeat center;
+}
+
+.arrow-hidden {
+  @include sorting-icons;
+  background: transparent;
+}
+
+.table-header-title {
+  padding: 0 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+
+  .table-header-title-item {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    &:last-child {
+      padding-left: 10px;
+    }
+  }
+}
+
+.sorting-column {
+  color: $app-red-color;
+}
+
+.table-header-filter {
+  width: 100%;
+  height: 25px;
+  border-color: $filter-border-color;
+  color: $filter-value-color;
+}
+
+.select-filter {
+  background: url(/assets/svg/select_arrow.svg) no-repeat center;
+  background-position-x: calc(100% - 5px);
+  -webkit-appearance: none;
+  padding: 0 5px;
+  border: 1px solid $filter-border-color;
+}
+
+.input-border{
+  border: 1px solid $filter-border-color;
+}
+
+.table-header-filter-container {
+  padding: 6px 10px 0 10px;
+}
+
+.table-header-filter-date {
+  position: relative;
+
+  .table-header-filter-date-field {
+    height: 21px;
+    border-color: $filter-border-color;
+    color: $filter-value-color;
+    padding-left: 35px;
+    width: calc(100% - 35px);
+  }
+
+  .table-header-filter-date-icon {
+    height: 15px;
+    width: 15px;
+    background: url(/assets/svg/date.svg) no-repeat center;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+  }
+}
+
+.table-header-settings {
+  min-width: 80px;
+  cursor: pointer;
+  background: $light-background-color;
+
+  &:hover {
+    .table-settings-icon {
+      background: url(/assets/svg/settings_red.svg) no-repeat center;
+    }
+  }
+  .table-settings-icon {
+    @include settings-icon;
+    background: url(/assets/svg/settings_black.svg) no-repeat center;
+  }
+  .table-settings-icon-active {
+    background: url(/assets/svg/settings_red.svg) no-repeat center;
+  }
+}
+
+.table-subproject-row {
+  padding: 0 6px;
+}
+
+.table-checkbox {
+  width: 24px;
+  height: 24px;
+  margin: 0 auto;
+
+}
+.checkbox-checked {
+  background: url(/assets/svg/checkbox_checked.svg) no-repeat center;
+}
+
+.checkbox-unchecked {
+  background: url(/assets/svg/check_box.svg) no-repeat center;
+}
+
+::ng-deep{
+  .table-tooltip {
+    font-size: 14px;
+  }
+}
+
+
+

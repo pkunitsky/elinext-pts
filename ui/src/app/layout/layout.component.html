@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <!-- Header for mobile view -->
+  <div class="mobile-header-wrapper">
+    <pts-mobile-header
+      (sidebarStatus)="onSidebarStatusChange($event)"
+    ></pts-mobile-header>
+  </div>
+
+  <!-- Content -->
+  <div class="main-content">
+    <!-- Sidebar -->
+    <div
+      class="sidebar-wrapper"
+      [ngClass]="isSidebarOpened ? 'sidebar-wrapper-opened' : ''"
+    >
+      <pts-sidebar
+        (sidebarStatus)="onSidebarStatusChange($event)"
+      ></pts-sidebar>
+    </div>
+
+    <!-- Current route view -->
+    <div
+      class="current-route-wrapper"
+      [ngClass]="isSidebarOpened ? 'sidebar-opened-position' : ''"
+    >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>

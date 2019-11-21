@@ -1,0 +1,17 @@
+@import '../../../shared/styles/config';
+
+.dialog-title {
+  @include modal-title;
+}
+
+.dialog-body {
+  @include modal-body;
+}
+
+.inline-buttons {
+  @include action-buttons;
+}
+
+.mat-button {
+  @include modals-button;
+}

@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  application:
+    name: rest
+  cloud:
+    config:
+      uri: http://config-service:8888
+      fail-fast: true
+      retry:
+        maxAttempts: 20

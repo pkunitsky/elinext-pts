@@ -1,0 +1,59 @@
+<ul class="pagination">
+
+  <!-- Back arrow -->
+  <li (click)="onPreviousClick()">
+    <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 1L1 6.5L6 12" stroke="#2C333F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </li>
+
+  <!-- First page is shown when current page is over than "3" and total is over than "5" -->
+  <li *ngIf="currentPage > 3 && total > 5" (click)="onPageClick(1)">
+    <span>1</span>
+  </li>
+
+  <!-- Second page is shown instead ellipsis, when current page is "5" and total is over than "6" or when current page is over than "5" and total is "7" -->
+  <li *ngIf="currentPage === 5 && total > 6 || currentPage > 5 && total === 7" (click)="onPageClick(2)">
+    <span>2</span>
+  </li>
+
+  <!-- Left ellipsis is shown when current page is over than "5" and total is over than "7" -->
+  <li *ngIf="currentPage > 5 && total > 7" (click)="onPreviousEllipsisClick()">
+    <span>...</span>
+  </li>
+
+  <!-- Paginator body -->
+  <li
+    *ngFor="let page of paginationPages" [ngClass]="currentPage === page ? 'current-item' : ''"
+    (click)="onPageClick(page)"
+  >
+    <span>{{page}}</span>
+  </li>
+
+
+  <!-- Right ellipsis is shown when current page is less than "total - 4" and total is over than "7" -->
+  <li *ngIf="currentPage < total - 4 && total > 7" (click)="onNextEllipsisClick()">
+    <span>...</span>
+  </li>
+
+  <!-- "total - 1" is shown when current page is "total - 4" and total is over than "6" or when current page is less than "3" and total is "7" -->
+  <li *ngIf="currentPage === (total - 4) && total > 6 || currentPage < 3 && total === 7"
+      (click)="onPageClick(total - 1)">
+    <span>{{total - 1}}</span>
+  </li>
+
+  <!-- Last page is shown when current page is less than "total - 2" and total is over than "5" -->
+  <li *ngIf="currentPage < total - 2 && total > 5" (click)="onPageClick(total)">
+    <span>{{total}}</span>
+  </li>
+
+
+  <!-- Next arrow -->
+  <li (click)="onNextClick()">
+    <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.999999 12L6 6.5L1 0.999999" stroke="#2C333F" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"></path>
+    </svg>
+  </li>
+
+</ul>

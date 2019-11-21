@@ -1,0 +1,402 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+  - changeSet:
+      id: 1
+      author: npaklonskaya
+      changes:
+        - createSequence:
+            catalogName: pts
+            cycle: true
+            incrementBy: 1
+            schemaName: public
+            sequenceName: hibernate_sequence
+  - changeSet:
+      id: 2
+      author: npaklonskaya_pradkevich
+      changes:
+        - createTable:
+            tableName: group
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+  - changeSet:
+      id: 3
+      author: npaklonskaya_pradkevich
+      changes:
+        - createTable:
+            tableName: user_account
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: first_name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: blocked
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+  - changeSet:
+      id: 4
+      author: npaklonskaya
+      changes:
+        - createTable:
+            tableName: change_log
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: entity_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: entity_type
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_type
+                  type: varchar
+              - column:
+                  name: description
+                  type: varchar
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_user
+                    nullable: false
+                    references: user_account(id)
+  - changeSet:
+      id: 5
+      author: npaklonskaya_pradkevich
+      changes:
+        - createTable:
+            tableName: project
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar
+              - column:
+                  name: description
+                  type: varchar
+              - column:
+                  name: status
+                  type: varchar
+                  defaultValue: SUBMITTED
+              - column:
+                  name: start_date
+                  type: timestamp
+              - column:
+                  name: deadline
+                  type: timestamp
+              - column:
+                  name: changed_date
+                  type: timestamp
+              - column:
+                  name: customer
+                  type: varchar
+              - column:
+                  name: parent_id
+                  type: int
+              - column:
+                  name: archived
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: type
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: project_lead_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_user
+                    nullable: true
+                    references: user_account(id)
+              - column:
+                  name: manager_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_manager
+                    nullable: true
+                    references: user_account(id)
+  - changeSet:
+      id: 6
+      author: npaklonskaya
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: priority
+                  type: varchar
+                  defaultValue: NORMAL
+              - column:
+                  name: code
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: varchar
+              - column:
+                  name: description
+                  type: varchar
+              - column:
+                  name: status
+                  type: varchar
+                  defaultValue: SUBMITTED
+              - column:
+                  name: start_date
+                  type: timestamp
+              - column:
+                  name: deadline
+                  type: timestamp
+              - column:
+                  name: changed_date
+                  type: timestamp
+              - column:
+                  name: archived
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: parent_id
+                  type: int
+              - column:
+                  name: type
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: estimated_time
+                  type: double
+              - column:
+                  name: percentage
+                  type: int
+                  defaultValue: 0
+              - column:
+                  name: project_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: assignee_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_assignee
+                    nullable: true
+                    references: user_account(id)
+              - column:
+                  name: manager_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_manager
+                    nullable: false
+                    references: user_account(id)
+        - addForeignKeyConstraint:
+            baseColumnNames: project_id
+            baseTableName: task
+            constraintName: fk_project
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            referencedColumnNames: id
+            referencedTableName: project
+        - addForeignKeyConstraint:
+            baseColumnNames: parent_id
+            baseTableName: task
+            constraintName: fk_subtask
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            referencedColumnNames: id
+            referencedTableName: task
+  - changeSet:
+      id: 7
+      author: npaklonskaya
+      changes:
+        - createTable:
+            tableName: time_report_configuration
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sort_by
+                  type: varchar
+              - column:
+                  name: sort_order
+                  type: varchar
+              - column:
+                  name: selected_filters
+                  type: varchar
+  - changeSet:
+      id: 8
+      author: npaklonskaya
+      changes:
+        - createTable:
+            tableName: time_report
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: hours
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reported_date
+                  type: timestamp
+              - column:
+                  name: comment
+                  type: varchar
+              - column:
+                  name: percentage
+                  type: int
+              - column:
+                  name: task_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_task
+                    nullable: false
+                    references: task(id)
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_user
+                    nullable: false
+                    references: user_account(id)
+  - changeSet:
+      id: 9
+      author: npaklonskaya
+      changes:
+        - createTable:
+            tableName: user_account_group
+            columns:
+              - column:
+                  name: group_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_group_user_group
+                    references: group(id)
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_group_user_user
+                    references: user_account(id)
+        - addPrimaryKey:
+            columnNames: group_id, user_id
+            constraintName: pk_group_user
+            tableName: user_account_group
+  - changeSet:
+      id: 10
+      author: npaklonskaya
+      changes:
+        - createTable:
+            tableName: project_groups
+            columns:
+              - column:
+                  name: group_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_group_project_group
+                    references: group(id)
+              - column:
+                  name: project_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_group_group_project
+                    references: project(id)
+        - addPrimaryKey:
+            columnNames: group_id, project_id
+            constraintName: pk_group_project
+            tableName: project_groups

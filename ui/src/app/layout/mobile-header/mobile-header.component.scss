@@ -1,0 +1,41 @@
+@import '../../shared/styles/config';
+
+.mobile-header {
+  background: $filter-value-color;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+
+  .header-icon-menu {
+    margin-left: 24px;
+    margin-right: 20px;
+    cursor: pointer;
+    width: 21px;
+  }
+  .header-icon-menu-opened {
+    background: url(/assets/svg/cross.svg) no-repeat center;
+  }
+  .header-icon-menu-closed {
+    background: url(/assets/svg/menu.svg) no-repeat center;
+  }
+
+  .mobile-header-logo-block {
+    padding: 17.3px 0;
+    display: flex;
+    align-items: center;
+
+    .mobile-header-logo {
+      width: 81px;
+      height: 16px;
+      background: url(/assets/svg/logo.svg) no-repeat center;
+    }
+    .mobile-header-logo-name {
+      font-family: "Sifonn Pro";
+      font-size: 21px;
+      line-height: 21px;
+      color: $logo-name-color;
+      margin-left: 12px;
+      padding-top: 1px;
+    }
+  }
+}

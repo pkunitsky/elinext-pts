@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: npaklonskaya
+      changes:
+        - createIndex:
+            catalogName: pts
+            columns:
+              - column:
+                  name: type
+                  type: varchar
+            indexName: idx_type
+            tableName: project
+            unique: true

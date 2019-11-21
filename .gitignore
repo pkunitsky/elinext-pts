@@ -1,0 +1,11 @@
+*.idea
+*.gradle
+*.iml
+*.jar
+/gradle
+/build
+/docker/src/main/config-service/build/
+/docker/src/main/gateway/build/
+/docker/src/main/registry-service/build/
+/docker/src/main/rest/build/
+/docker/src/main/ui/build/

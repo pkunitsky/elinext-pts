@@ -1,0 +1,56 @@
+<!-- Title -->
+<div class="dialog-title">
+  <span >Changes log</span>
+</div>
+
+<!-- Changes log block -->
+<div class="changes-log-container">
+
+  <!-- Changes log row -->
+  <div class="log-line" *ngFor="let log of changesLog; index as i">
+
+    <!-- Date -->
+    <div class="log-date">
+      <span>{{getDate(log.createdDate)}}</span>
+    </div>
+
+    <!-- Decoration line-->
+    <div class="log-line-decoration" ptsChangesLogLine [changesLogLength]="changesLog.length" [index]="i"></div>
+
+    <!-- Changes info -->
+    <div class="log-info">
+      <div class="log-author-row">
+        <span class="log-author">
+          {{(log.userFirstName | firstLetterToUpperCase) + ' ' + (log.userLastName | firstLetterToUpperCase)}}
+        </span>
+        <span class="log-type"> {{log.eventType.toLowerCase() + ' ' + getLogType()}}</span>
+      </div>
+      <div class="log-value" *ngFor="let event of log.values">
+        <span class="field-name">{{getChangeFieldName(event) | firstLetterToUpperCase}}</span>
+        <span class="field-value">{{getChangeFieldValue(event)}}</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Actions Buttons -->
+<div class="inline-buttons">
+
+  <!-- Show paginator if totalPages > 1 -->
+  <div>
+    <pts-paginator
+      *ngIf="data.pageChangesLog.totalPages > 1"
+      [total]="data.pageChangesLog.totalPages"
+      (nextPage)="updateCurrentPage($event)"
+    ></pts-paginator>
+  </div>
+
+  <!-- Close button -->
+  <button
+    mat-button
+    class="mat-button"
+    [mat-dialog-close]="false"
+  >CLOSE</button>
+
+</div>

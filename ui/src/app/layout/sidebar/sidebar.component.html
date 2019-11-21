@@ -1,0 +1,204 @@
+<div class="sidebar">
+  <div class="sidebar-content">
+    <!-- Top block -->
+    <div>
+
+      <!-- Logo block -->
+      <div class="sidebar-logo">
+        <!-- Toggle sidebar button -->
+        <div
+          class="sidebar-logo-button"
+          (click)="toggleSidebar()"
+          [ngClass]="isSidebarOpen ? 'sidebar-logo-button-open' : 'sidebar-logo-button-close'"
+        ></div>
+        <!-- Logo -->
+        <div
+          class="logo"
+          routerLink=""
+          [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+        ></div>
+        <div
+          class="name-pts"
+          [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+        >PTS</div>
+      </div>
+
+      <!-- Search field -->
+      <div
+        class="search-frame"
+        [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+      >
+        <input
+          name="search"
+          maxlength="100"
+          class="search-input"
+          placeholder="Search ID"
+          type="text"
+        >
+      </div>
+
+      <div
+        class="search-frame-hide"
+        (click)="onSearchIconClick()"
+        [ngClass]="isSidebarOpen ? 'hide-search': ''"
+      ></div>
+
+      <!-- Menu -->
+      <div class="sidebar-menu-list">
+
+        <!-- Dashboard item-->
+        <div
+          class="sidebar-menu-item"
+          (click)="navigateTo('/dashboard')"
+        >
+          <div
+            class="sidebar-menu-left-icon"
+            [ngClass]="url === '/dashboard' ? 'sidebar-menu-left-icon-active': ''"
+          ></div>
+          <div
+            class="sidebar-menu-icon"
+            [ngClass]="url === '/dashboard' ? 'dashboard-icon-active': 'dashboard-icon'"
+          ></div>
+          <div
+            class="sidebar-menu-title"
+            [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+            [style.color]="url === '/dashboard' ? '#F2C94C': ''"
+          >DASHBOARD</div>
+        </div>
+
+        <!-- Projects item-->
+        <div
+          class="sidebar-menu-item"
+          (click)="navigateTo('/projects')"
+        >
+          <div
+            class="sidebar-menu-left-icon"
+            [ngClass]="url === '/projects' ? 'sidebar-menu-left-icon-active': ''"
+          ></div>
+          <div
+            class="sidebar-menu-icon"
+            [ngClass]="url === '/projects' ? 'projects-icon-active': 'projects-icon'"
+          ></div>
+          <div
+            class="sidebar-menu-title"
+            [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+            [style.color]="url === '/projects' ? '#F2C94C': ''"
+          >PROJECTS</div>
+        </div>
+
+        <!-- Time reports item-->
+        <div
+          class="sidebar-menu-item"
+          (click)="navigateTo('/time-reports')"
+        >
+          <div
+            class="sidebar-menu-left-icon"
+            [ngClass]="url === '/time-reports' ? 'sidebar-menu-left-icon-active': ''"
+          ></div>
+          <div
+            class="sidebar-menu-icon"
+            [ngClass]="url === '/time-reports' ? 'time-reports-icon-active': 'time-reports-icon'"
+          ></div>
+          <div
+            class="sidebar-menu-title"
+            [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+            [style.color]="url === '/time-reports' ? '#F2C94C': ''"
+          >TIME REPORTS</div>
+        </div>
+
+        <!-- Groups item-->
+        <div
+          class="sidebar-menu-item"
+          (click)="navigateTo('/groups')"
+          [ngClass]=""
+        >
+          <div
+            class="sidebar-menu-left-icon"
+            [ngClass]="url === '/groups' ? 'sidebar-menu-left-icon-active': ''"
+          ></div>
+          <div
+            class="sidebar-menu-icon"
+            [ngClass]="url === '/groups' ? 'groups-icon-active': 'groups-icon'"
+          ></div>
+          <div
+            class="sidebar-menu-title"
+            [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+            [style.color]="url === '/groups' ? '#F2C94C': ''"
+          >GROUPS</div>
+        </div>
+
+        <!-- Settings item-->
+        <div
+          class="sidebar-menu-item"
+          (click)="navigateTo('/settings')"
+        >
+          <div
+            class="sidebar-menu-left-icon"
+            [ngClass]="url === '/settings' ? 'sidebar-menu-left-icon-active': ''"
+          ></div>
+          <div
+            class="sidebar-menu-icon"
+            [ngClass]="url === '/settings' ? 'settings-icon-active': 'settings-icon'"
+          ></div>
+          <div
+            class="sidebar-menu-title"
+            [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+            [style.color]="url === '/settings' ? '#F2C94C': ''"
+          >SETTINGS</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom block -->
+    <div>
+      <div class="sidebar-profile">
+        <!-- User profile -->
+        <div class="sidebar-profile-left-icon"></div>
+        <div
+          class="sidebar-profile-content"
+          [ngClass]="isSidebarOpen ? 'sidebar-opened': ''"
+        >
+          <div>
+            <div class="sidebar-profile-name">{{getUserName()}}</div>
+            <div class="sidebar-profile-email">{{getUserEmail()}}</div>
+          </div>
+          <div class="sidebar-profile-goto">&#8249;</div>
+        </div>
+
+        <!-- Navigation block on tablet -->
+        <div
+          class="sidebar-profile-tablet"
+          [ngClass]="isSidebarOpen ? 'sidebar-profile-tablet-hide': ''"
+        >
+          <span class="sidebar-profile-tablet-text">{{getUserNameAbbreviation()}}</span>
+        </div>
+
+        <!-- Navigation block -->
+        <div class="sidebar-profile-block">
+          <div
+            class="sidebar-profile-block-item"
+            routerLink=""
+          >
+            <span class="sidebar-profile-block-item-decoration">My assigned tasks</span>
+          </div>
+          <div
+            class="sidebar-profile-block-item"
+            routerLink=""
+          >
+            <span class="sidebar-profile-block-item-decoration">My time report</span>
+          </div>
+          <div
+            class="sidebar-profile-block-item"
+            routerLink=""
+          >
+            <span class="sidebar-profile-block-item-decoration">Logout</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+

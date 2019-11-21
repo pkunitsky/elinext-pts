@@ -1,0 +1,150 @@
+<div class="dialog-title">
+  <span>Create feature</span>
+</div>
+<div class="dialog-body">
+
+  <div class="feature-text">
+    <span>All selected tasks will united in one new feature</span>
+  </div>
+
+  <form [formGroup]="form" novalidate>
+
+    <!-- Name field -->
+    <div
+      class="float-container"
+      ptsFloatLabel
+      [ngClass]="name.value ? 'active' : ''"
+    >
+      <label for="nameField">Input new feature name</label>
+      <input
+        type="text"
+        name="name"
+        formControlName="name"
+        id="nameField"
+        required
+      >
+    </div>
+
+    <!-- Advanced settings toggle -->
+    <div
+      class="advanced-settings"
+      [ngClass]="isAdvancedSettingsShown ? 'advanced-settings-expanded' : ''"
+      (click)="toggleAdvancedSettings()"
+    >
+      <span>Advanced settings</span>
+    </div>
+
+    <!-- Advanced settings -->
+    <div [ngClass]="isAdvancedSettingsShown ? 'advanced-visible' : 'advanced-hidden'">
+
+      <!-- Priority field -->
+      <div
+        class="float-container"
+        ptsFloatLabel
+        [ngClass]="priority.value ? 'active' : ''"
+      >
+        <label for="priorityField">Priority</label>
+        <select
+          class="select-field"
+          name="priority"
+          formControlName="priority"
+          id="priorityField"
+        >
+          <option
+            *ngFor="let option of priorityTypes"
+            [value]="option"
+          >{{option}}</option>
+        </select>
+      </div>
+
+      <!-- Date fields -->
+      <div class="inline-container">
+
+        <!-- Start Date field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="startDate.value ? 'active' : ''"
+        >
+          <label for="startDateField">Start date</label>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+          <div
+            class="date-icon"
+            (click)="startDatePicker.open()"
+          ></div>
+          <input
+            type="text"
+            name="startDate"
+            formControlName="startDate"
+            id="startDateField"
+            [matDatepicker]="startDatePicker"
+            (dateChange)="checkValue($event)"
+          >
+        </div>
+
+        <!-- Deadline field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="deadline.value ? 'active' : ''"
+        >
+          <label for="deadlineField">Deadline</label>
+          <mat-datepicker #deadlinePicker></mat-datepicker>
+          <div
+            class="date-icon"
+            (click)="deadlinePicker.open()"
+          ></div>
+          <input
+            type="text"
+            name="deadline"
+            formControlName="deadline"
+            id="deadlineField"
+            [matDatepicker]="deadlinePicker"
+            (dateChange)="checkValue($event)"
+          >
+        </div>
+      </div>
+
+      <!-- Description field -->
+      <div
+        class="float-container textarea-container"
+        ptsFloatLabel
+        [ngClass]="description.value ? 'active' : ''"
+      >
+        <label for="descriptionField">Description</label>
+        <textarea
+          type="text"
+          name="description"
+          formControlName="description"
+          id="descriptionField"
+          required
+        ></textarea>
+      </div>
+
+
+    </div>
+
+  </form>
+
+</div>
+
+<!-- Action buttons -->
+<div class="inline-buttons">
+
+  <button
+    mat-button
+    class="mat-button"
+    [mat-dialog-close]="false"
+  >CANCEL
+  </button>
+
+  <button
+    mat-button
+    class="mat-button"
+    [disabled]="getDisabledStatus()"
+    [mat-dialog-close]="getFeature()"
+  >SUBMIT</button>
+
+</div>
+
+

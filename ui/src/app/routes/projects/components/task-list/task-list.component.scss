@@ -1,0 +1,105 @@
+@import '../../../../shared/styles/config';
+
+.task-header {
+  padding: 24px 30px 0;
+  min-height: 103px;
+}
+
+.reports {
+  @include font-Roboto;
+  margin: 0 30px;
+  overflow: auto;
+  .report-item-container {
+    .divider {
+      width: 100%;
+      border-bottom: 1px solid $table-nested-element-line-color;
+      margin: 10px 0;
+    }
+    .report-item {
+      .report-item-author {
+        width: 150px;
+        display: inline-flex;
+        flex-direction: column;
+        align-content: center;
+
+        .author-name {
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 19px;
+          color: $filter-value-color;
+        }
+        .report-time {
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 14px;
+          margin-top: 5px;
+          color: $profile-email-color;
+        }
+        .report-estimated-time {
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 16px;
+          padding-left: 20px;
+          margin-top: 10px;
+          background: url(/assets/svg/task_time.svg) no-repeat left;
+        }
+      }
+
+      .report-item-text {
+        display: inline-flex;
+        width: calc(100% - 210px);
+        flex-direction: column;
+        .report-text {
+          font-size: 16px;
+          line-height: 150%;
+          color: $filter-value-color;
+        }
+      }
+
+      .report-item-actions {
+        width: 60px;
+        display: inline-flex;
+        justify-content: space-around;
+        .edit-report {
+          width: 25px;
+          height: 25px;
+          cursor: pointer;
+          background: url(/assets/svg/edit.svg) no-repeat center;
+        }
+        .delete-report {
+          width: 25px;
+          height: 25px;
+          cursor: pointer;
+          background: url(/assets/svg/recycler.svg) no-repeat center;
+        }
+      }
+    }
+  }
+}
+
+.paginator-container {
+  padding: 23px 0;
+  user-select: none;
+}
+
+
+::ng-deep{
+  .table-tooltip {
+    font-size: 14px;
+  }
+}
+
+
+@media screen and (max-width: 577px) {
+  .reports {
+    .report-item-container {
+      .report-item {
+        display: flex;
+        flex-direction: column;
+        .report-item-text{
+          width: 100%;
+        }
+      }
+    }
+  }
+}

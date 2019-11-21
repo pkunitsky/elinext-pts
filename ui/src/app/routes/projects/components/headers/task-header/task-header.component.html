@@ -1,0 +1,97 @@
+<div class="header-container">
+
+  <!-- First row -->
+  <div class="header-row">
+    <!-- Title -->
+    <pts-title
+      [project]="project"
+      [subProject]="subProject"
+      [feature]="feature"
+      [task]="instance"
+      (toBack)="onBackArrowClick()"
+    ></pts-title>
+
+    <!-- Buttons -->
+    <div class="action-buttons">
+      <pts-button
+        [label]="'CHANGES LOG'"
+        (clickEvent)="onChangeLogClick()"
+        [basicButton]="true"
+      ></pts-button>
+
+      <pts-button
+        [label]="'MOVE'"
+        (clickEvent)="onMoveClick()"
+        [basicButton]="true"
+      ></pts-button>
+
+      <pts-button
+        [label]="'ARCHIVE'"
+        (clickEvent)="onArchiveClick()"
+        [basicButton]="true"
+      ></pts-button>
+
+      <pts-button
+        [label]="'EDIT'"
+        (clickEvent)="onEditClick()"
+      ></pts-button>
+    </div>
+  </div>
+
+  <div class="header-row-info">
+
+    <!-- Status -->
+    <pts-status-indicator
+      *ngIf="instance?.status"
+      [status]="instance?.status"
+    ></pts-status-indicator>
+
+    <!-- Info -->
+    <pts-additional-info
+      *ngFor="let item of getAdditionalInfoItems(), index as i"
+      [field]="item"
+      [value]="instance[item]"
+      [users]="users"
+      [lastItem]="getAdditionalInfoItems().length === i + 1"
+    ></pts-additional-info>
+  </div>
+
+  <div class="header-divider"></div>
+
+  <div class="parent-task-container">
+    <span class="parent-task">Parent task - </span>
+    <span class="parent-task-code">{{feature?.code}} </span>
+    <span class="parent-task-name">{{feature?.name}} </span>
+  </div>
+
+  <!-- Description -->
+  <div
+    [ngClass]="isDescriptionShown ? 'description-visible' : 'description-hidden'"
+    class="header-description"
+  >
+    <span class="info-main">{{instance?.description}}</span>
+  </div>
+
+  <!-- Description toggle -->
+  <div
+    class="description-toggle"
+    [ngClass]="isDescriptionShown ? 'description-expanded' : ''"
+    (click)="toggleDescription()"
+  >
+    <span>{{isDescriptionShown ? 'Hide' : 'Show'}} description</span>
+  </div>
+  <div class="header-divider"></div>
+
+  <!-- Bottom row -->
+  <div class="second-header-row">
+    <div class="section-name">
+      <div>Reports</div>
+      <div class="reports-number">{{pageReport?.numberOfElements}} Reports for {{instance?.estimatedTime}} hrs</div>
+    </div>
+    <pts-button
+      [label]="'ADD REPORT'"
+      (clickEvent)="onAddReport()"
+    ></pts-button>
+  </div>
+
+</div>

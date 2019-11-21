@@ -1,0 +1,62 @@
+<div
+  class="project-header-wrapper"
+  #headerElement
+>
+  <pts-projects-list-header
+    [selected]="selectedProjects"
+    (add)="onCreate($event)"
+    (archive)="onArchive($event)"
+    (join)="onJoin($event)"
+  ></pts-projects-list-header>
+</div>
+
+<div
+  class="table-container"
+  [style.height]="centralElHeight"
+>
+  <div #centralElement>
+    <pts-table
+      [data]="data"
+      [tableDataColumns]="tableDataColumns"
+      [showNestedItems]="showSubProjects"
+      [trigger]="trigger"
+      [allUsers]="users"
+      (settingsPosition)="setColumnSelectionPosition($event)"
+      (rowSelected)="rowSelected($event)"
+      (deleteRow)="delete($event)"
+      (rowClicked)="navigateToSelectedRow($event)"
+    ></pts-table>
+
+    <div class="table-message" *ngIf="!data?.length">
+      <span >Start with creating project</span>
+    </div>
+  </div>
+</div>
+
+<div
+  class="paginator-container"
+  #footerElement
+>
+  <pts-paginator
+    *ngIf="totalPages"
+    [total]="totalPages"
+    (nextPage)="updatePage($event)"
+  ></pts-paginator>
+</div>
+
+<div
+  class="table-column-selection-container"
+  [matMenuTriggerFor]="menu"
+  #selectionContainer
+></div>
+
+<mat-menu
+  #menu="matMenu"
+  xPosition="before"
+>
+  <pts-column-selection
+    [options]="columns"
+    [selection]="columnSelected"
+    (selectionChanged)="onColumnsChange($event)"
+  ></pts-column-selection>
+</mat-menu>

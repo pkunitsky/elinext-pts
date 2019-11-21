@@ -1,0 +1,134 @@
+<div class="header-title">
+  <div class="name-wrapper">
+
+    <!-- Project part -->
+    <div class="name-item">
+      <div
+        class="header-title-back-arrow"
+        (click)="onBackArrowClick()"
+      ></div>
+      <div
+        *ngIf="nesting < 4"
+        class="header-title-code"
+      >{{project?.code}}</div>
+
+      <div
+        *ngIf="nesting > 2"
+        [matTooltip]="project?.name"
+        matTooltipClass="tooltip"
+        class="header-title-ellipsis"
+      >...
+      </div>
+
+      <div
+        *ngIf="nesting < 3"
+        ptsTooltip
+        [tooltip]="tooltip1"
+        [ngClass]="getCssClass()"
+      >
+        <div
+          [matTooltip]="project?.name"
+          #tooltip1="matTooltip"
+          matTooltipPosition="after"
+          matTooltipClass="tooltip"
+        ></div>
+        <span class="header-title-name">{{project?.name}}</span>
+      </div>
+
+      <div
+        *ngIf="nesting > 1"
+        class="title-divider"></div>
+
+    </div>
+
+    <!-- SubProject part -->
+    <div
+      *ngIf="subProject"
+      class="name-item">
+
+      <div class="header-title-code">{{subProject?.code}}</div>
+
+      <div
+        *ngIf="nesting > 3"
+        [matTooltip]="subProject?.name"
+        matTooltipClass="tooltip"
+        class="header-title-ellipsis"
+      >...
+      </div>
+
+      <div
+        *ngIf="nesting < 4"
+        ptsTooltip
+        [tooltip]="tooltip2"
+        [ngClass]="getCssClass()"
+      >
+        <div
+          [matTooltip]="subProject?.name"
+          #tooltip2="matTooltip"
+          matTooltipPosition="after"
+          matTooltipClass="tooltip"
+        ></div>
+        <span
+          class="header-title-name">{{subProject?.name}}</span>
+      </div>
+      <div
+        *ngIf="nesting > 2"
+        class="title-divider"
+      ></div>
+    </div>
+
+    <!-- Feature part -->
+    <div
+      *ngIf="feature"
+      class="name-item">
+
+      <div
+        class="header-title-code"
+      >{{feature?.code}}</div>
+
+      <div
+        ptsTooltip
+        [tooltip]="tooltip3"
+        [ngClass]="getCssClass()"
+      >
+        <div
+          [matTooltip]="feature?.name"
+          #tooltip3="matTooltip"
+          matTooltipPosition="after"
+          matTooltipClass="tooltip"
+        ></div>
+        <span
+          class="header-title-name"
+        >{{feature?.name}}</span>
+      </div>
+      <div
+        *ngIf="task"
+        class="title-divider"
+      ></div>
+    </div>
+
+    <!-- Task part -->
+    <div
+      *ngIf="task"
+      class="name-item"
+    >
+      <div class="header-title-code">{{task?.code}}</div>
+      <div
+        ptsTooltip
+        [tooltip]="tooltip4"
+        [ngClass]="getCssClass()"
+      >
+        <div
+          [matTooltip]="task?.name"
+          #tooltip4="matTooltip"
+          matTooltipPosition="after"
+          matTooltipClass="tooltip"
+        ></div>
+        <span
+          class="header-title-name"
+        >{{task?.name}}</span>
+      </div>
+    </div>
+
+  </div>
+</div>

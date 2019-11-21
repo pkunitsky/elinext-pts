@@ -1,0 +1,51 @@
+<div [ngSwitch]=data.type>
+
+  <!-- Title -->
+  <div class="dialog-title">
+    <span *ngSwitchCase="'archive'">Archive</span>
+    <span *ngIf="data.type === 'joinChecked' || data.type === 'moveSubProject'">Move subprojects to...</span>
+  </div>
+
+  <!-- Dialog body -->
+  <div class="dialog-body">
+    <span *ngSwitchCase="'archive'">Do you really want to remove {{data.selected}} checked projects to archive?</span>
+    <span *ngSwitchCase="'joinChecked'">Move these subprojects to next project</span>
+    <span *ngSwitchCase="'moveSubProject'">Move selected subprojects to this project</span>
+    <select
+      *ngIf="data.type === 'joinChecked' || data.type === 'moveSubProject'"
+      class="dialog-select select" [(ngModel)]="value"
+    >
+      <option
+        *ngFor="let option of options"
+        [value]="option.id"
+      >{{option.option}}</option>
+    </select>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="inline-buttons">
+
+    <button
+      mat-button
+      class="mat-button"
+      [mat-dialog-close]="false"
+    >CANCEL</button>
+
+    <button
+      *ngSwitchCase="'archive'"
+      mat-button
+      class="mat-button"
+      [mat-dialog-close]="true"
+    >SUBMIT</button>
+
+    <button
+      *ngIf="data.type === 'joinChecked' || data.type === 'moveSubProject'"
+      mat-button
+      class="mat-button"
+      [disabled]="!value"
+      [mat-dialog-close]="value"
+    >SUBMIT</button>
+
+  </div>
+
+</div>

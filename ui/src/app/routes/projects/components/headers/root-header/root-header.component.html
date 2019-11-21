@@ -1,0 +1,48 @@
+<div class="header-container">
+  <div>
+    <!-- Title -->
+    <div class="project-title">
+      <span>PROJECTS</span>
+    </div>
+    <!-- Toggle subProjects -->
+    <div
+      class="toggle-projects"
+      [ngClass]="showSubProjects ? 'option-checked' : 'option-unchecked'"
+      (click)="subProjectsToggle()"
+    >
+      <span>Show subprojects</span>
+    </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="buttons-row">
+    <div class="inline-buttons">
+      <!-- Create project button -->
+      <pts-button
+        [label]="'CREATE PROJECT'"
+        (clickEvent)="onAdd(createProjectData)"
+        [width]="180"
+      ></pts-button>
+    </div>
+
+    <div
+      *ngIf="selected.length"
+      class="inline-buttons buttons-direction"
+    >
+      <!-- Archive button -->
+      <pts-button
+        [label]="'ARCHIVE'"
+        (clickEvent)="onArchiveSelectedClick()"
+        [basicButton]="true"
+      ></pts-button>
+
+      <!-- Join button -->
+      <pts-button
+        [label]="'JOIN CHECKED'"
+        (clickEvent)="onJoinCheckedClick()"
+        [width]="180"
+      ></pts-button>
+    </div>
+  </div>
+</div>
+

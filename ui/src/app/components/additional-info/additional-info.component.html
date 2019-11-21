@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="header-info">
+    <span class="info-slave">{{getFieldTitle()}} </span>
+    <span [ngClass]="isLeadField() ? 'info-red' : 'info-main'">{{getFieldText()}}</span>
+  </div>
+
+  <div
+    *ngIf="!lastItem"
+    class="divider"
+  ></div>
+</div>

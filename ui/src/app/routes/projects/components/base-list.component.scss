@@ -1,0 +1,28 @@
+@import '../../../shared/styles/config';
+
+.table-container {
+  margin: 0 30px;
+  overflow: auto;
+}
+
+.project-header-wrapper {
+  padding: 24px 30px;
+  min-height: 103px;
+}
+
+.paginator-container {
+  padding: 23px 0;
+  user-select: none;
+}
+
+.table-column-selection-container {
+  position: absolute;
+  height: 70px;
+  width: 80px;
+}
+
+.table-message {
+  @include font-Roboto;
+  font-weight: bold;
+  padding-top: 20px;
+}

@@ -1,0 +1,116 @@
+@import '../../../shared/styles/config';
+
+.dialog-title {
+  @include modal-title;
+}
+
+.dialog-body {
+  @include modal-body;
+}
+
+.float-container {
+  border: solid 1px $border-color;
+  box-sizing: border-box;
+  margin: 10px 0;
+  padding: 0 8px;
+  position: relative;
+
+  textarea {
+    @include floating-label;
+    margin-top: 20px;
+    height: 50px;
+  }
+
+  input, select {
+    @include floating-label;
+  }
+
+  label {
+    font-size: 14px;
+    color: $border-color;
+    position: absolute;
+    top: -5px;
+    transform-origin: top left;
+    transform: translate(0, 16px) scale(1);
+    transition: all .1s ease-in-out;
+  }
+
+  &.active {
+    label {
+      transform: translate(0, 4px) scale(.715);
+    }
+  }
+}
+
+.advanced-settings {
+  color: $app-red-color;
+  width: 120px;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
+  background: url(/assets/svg/down_arrow.svg) no-repeat right;
+  padding: 10px 0;
+  user-select: none;
+}
+
+.advanced-settings-expanded {
+  background: url(/assets/svg/top_arrow.svg) no-repeat right;
+}
+
+.select-field {
+  background: url(/assets/svg/select_arrow.svg) no-repeat center;
+  background-position-x: calc(100% - 5px);
+  -webkit-appearance: none;
+  padding: 0 5px;
+}
+
+.inline-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-icon {
+  height: 15px;
+  width: 15px;
+  background: url(/assets/svg/date.svg) no-repeat center;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+
+.advanced-visible {
+  @include advanced-settings-block;
+  height: 70px;
+}
+
+.advanced-hidden {
+  height: 1px;
+  opacity: 0;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.inline-buttons {
+  @include action-buttons;
+}
+
+.mat-button {
+  @include modals-button;
+}
+
+.select-container {
+  width: 100%;
+  max-width: 188px;
+}
+
+.textarea-container {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 576px) {
+  .float-container {
+    label {
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,116 @@
+@import '../../../../../shared/styles/config';
+
+::ng-deep{
+  .table-tooltip {
+    font-size: 14px;
+  }
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
+    }
+  }
+  .action-buttons {
+    @include action-buttons;
+
+    @media screen and (max-width: 1000px) {
+      flex-direction: row-reverse;
+      margin: 10px 0;
+    }
+  }
+
+  .header-row-info {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 5px 0;
+  }
+
+  .header-divider {
+    width: 100%;
+    border-bottom: 1px solid $table-nested-element-line-color;
+    margin: 20px 0;
+  }
+
+  .description-toggle {
+    color: $app-red-color;
+    width: 120px;
+    font-size: 12px;
+    line-height: 14px;
+    cursor: pointer;
+    background: url(/assets/svg/down_arrow.svg) no-repeat right;
+    user-select: none;
+  }
+
+  .header-description {
+    @include font-Roboto;
+    font-size: 12px;
+  }
+
+  .description-expanded {
+    background: url(/assets/svg/top_arrow.svg) no-repeat right;
+  }
+
+  .description-visible {
+    opacity: 1;
+    transition: 0.5s;
+    padding-bottom: 20px;
+  }
+
+  .description-hidden {
+    height: 1px;
+    opacity: 0;
+    transition: 0.2s;
+    overflow: hidden;
+  }
+
+  .parent-task-container {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 12px;
+
+    .parent-task {
+      font-weight: bold;
+      font-size: 12px;
+    }
+    .parent-task-code {
+      color: $header-code-color;
+    }
+    .parent-task-name {
+      color: $app-red-color;
+    }
+  }
+  .second-header-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    min-height: 57px;
+
+    .section-name {
+      font-family: Sifonn;
+      font-size: 18px;
+      line-height: 18px;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      padding-top: 15px;
+    }
+    .reports-number {
+      font-size: 12px;
+      line-height: 14px;
+      padding-top: 10px;
+      font-weight: normal;
+    }
+  }
+}

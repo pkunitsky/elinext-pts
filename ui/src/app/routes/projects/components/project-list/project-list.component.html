@@ -1,0 +1,68 @@
+<div
+  class="project-header-wrapper"
+  #headerElement
+>
+  <pts-project-info-header
+    [instance]="pageInstance"
+    [routeType]="routeType"
+    [selected]="selectedProjects"
+    [users]="users"
+    (add)="onCreate($event)"
+    (archive)="onArchive($event)"
+    (joinInFeature)="onJoinInFeature($event)"
+    (changesLog)="onChangesLog($event)"
+    (move)="onMove($event)"
+    (edit)="onEdit($event)"
+  ></pts-project-info-header>
+</div>
+
+<div
+  class="table-container"
+  [style.height]="centralElHeight"
+>
+  <div #centralElement>
+    <pts-table
+      [data]="data"
+      [tableDataColumns]="tableDataColumns"
+      [showNestedItems]="showSubProjects"
+      [trigger]="trigger"
+      [allUsers]="users"
+      (settingsPosition)="setColumnSelectionPosition($event)"
+      (rowSelected)="rowSelected($event)"
+      (deleteRow)="delete($event)"
+      (rowClicked)="navigateToSelectedRow($event)"
+    ></pts-table>
+
+    <div class="table-message" *ngIf="!data?.length">
+      <span>Start with creating tasks or subprojects</span>
+    </div>
+  </div>
+</div>
+
+<div
+  class="paginator-container"
+  #footerElement
+>
+  <pts-paginator
+    *ngIf="totalPages"
+    [total]="totalPages"
+    (nextPage)="updatePage($event)"
+  ></pts-paginator>
+</div>
+
+<div
+  class="table-column-selection-container"
+  [matMenuTriggerFor]="menu"
+  #selectionContainer
+></div>
+
+<mat-menu
+  #menu="matMenu"
+  xPosition="before"
+>
+  <pts-column-selection
+    [options]="columns"
+    [selection]="columnSelected"
+    (selectionChanged)="onColumnsChange($event)"
+  ></pts-column-selection>
+</mat-menu>

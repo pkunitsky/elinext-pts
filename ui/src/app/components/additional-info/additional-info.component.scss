@@ -1,0 +1,21 @@
+@import '../../shared/styles/config';
+
+.container {
+  @include info-container;
+  .header-info {
+    @include info-text;
+    .info-slave {
+      color: $header-code-color;
+    }
+    .info-red {
+      color: $app-red-color;
+    }
+    .info-main {
+      color: $filter-value-color;
+    }
+  }
+
+  .divider {
+    @include dot-divider;
+  }
+}

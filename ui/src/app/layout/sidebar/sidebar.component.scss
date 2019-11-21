@@ -1,0 +1,371 @@
+@import '../../shared/styles/config';
+
+.sidebar {
+  position: relative;
+  height: 100%;
+
+  .sidebar-content {
+    height: 100%;
+    width: 100%;
+    background: $filter-value-color;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .sidebar-logo {
+      margin-left: 24px;
+      padding-top: 34px;
+      display: flex;
+      align-items: center;
+
+      .sidebar-logo-button {
+        width: 21px;
+        height: 21px;
+        display: none;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      .sidebar-logo-button-close {
+        background: url(/assets/svg/menu.svg) no-repeat center;
+      }
+
+      .sidebar-logo-button-open {
+        background: url(/assets/svg/cross.svg) no-repeat center;
+      }
+
+      .logo {
+        width: 81px;
+        height: 16px;
+        background: url(/assets/svg/logo.svg) no-repeat center;
+        cursor: pointer;
+      }
+
+      .name-pts {
+        font-family: "Sifonn Pro";
+        font-size: 21px;
+        line-height: 21px;
+        color: $logo-name-color;
+        margin-left: 12px;
+        padding-top: 1px;
+      }
+    }
+
+    .search-frame {
+      margin: 12px 26px 0;
+
+      .search-input {
+        background-color: $light-background-color;
+        background-image: url('/assets/svg/search.svg');
+        background-position: 11px;
+        background-repeat: no-repeat;
+        border: 1px solid $search-input-border;
+        font-size: 14px;
+        font-weight: 300;
+        height: 37px;
+        width: 110px;
+        line-height: 16px;
+        padding-left: 34px;
+
+        &::placeholder {
+          color: $search-input-placeholder;
+        }
+      }
+    }
+
+    .search-frame-hide {
+      margin-left: 26px;
+      margin-top: 16px;
+      width: 17px;
+      height: 38px;
+      display: none;
+      cursor: pointer;
+      background: url(/assets/svg/search.svg) no-repeat center;
+    }
+
+    .sidebar-menu-list {
+      margin-top: 32px;
+
+      .sidebar-menu-item {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+        margin-bottom: 13px;
+
+        .sidebar-menu-left-icon {
+          width: 4px;
+          height: 37px;
+          visibility: hidden;
+          background: url(/assets/svg/checked_mark.svg) no-repeat left;
+        }
+
+        .sidebar-menu-left-icon-active {
+          visibility: visible;
+        }
+
+        .dashboard-icon-active {
+          background: url(/assets/svg/speed_hover.svg) no-repeat center;
+        }
+        .sidebar-menu-title-active {
+          color: $menu-on-hover-color;
+        }
+        .projects-icon-active {
+          background: url(/assets/svg/projects_hover.svg) no-repeat center;
+        }
+        .time-reports-icon-active {
+          background: url(/assets/svg/time_reports_hover.svg) no-repeat center;
+        }
+        .groups-icon-active {
+          background: url(/assets/svg/groups_hover.svg) no-repeat center;
+        }
+        .settings-icon-active {
+          background: url(/assets/svg/settings_hover.svg) no-repeat center;
+        }
+
+        .sidebar-menu-icon {
+          width: 20px;
+          height: 20px;
+          margin-left: 22px;
+        }
+
+        .dashboard-icon {
+          background: url(/assets/svg/speed.svg) no-repeat center;
+        }
+
+        .projects-icon {
+          background: url(/assets/svg/projects.svg) no-repeat center;
+        }
+
+        .time-reports-icon {
+          background: url(/assets/svg/time_reports.svg) no-repeat center;
+        }
+
+        .groups-icon {
+          background: url(/assets/svg/groups.svg) no-repeat center;
+        }
+
+        .settings-icon {
+          background: url(/assets/svg/settings.svg) no-repeat center;
+        }
+
+        .sidebar-menu-title {
+          font-family: "Sifonn Pro";
+          font-size: 14px;
+          line-height: 14px;
+          color: $light-background-color;
+          margin-left: 14px;
+        }
+
+        &:hover {
+          .dashboard-icon {
+            background: url(/assets/svg/speed_hover.svg) no-repeat center;
+          }
+          .sidebar-menu-title {
+            color: $menu-on-hover-color;
+          }
+          .projects-icon {
+            background: url(/assets/svg/projects_hover.svg) no-repeat center;
+          }
+          .time-reports-icon {
+            background: url(/assets/svg/time_reports_hover.svg) no-repeat center;
+          }
+          .groups-icon {
+            background: url(/assets/svg/groups_hover.svg) no-repeat center;
+          }
+          .settings-icon {
+            background: url(/assets/svg/settings_hover.svg) no-repeat center;
+          }
+        }
+      }
+    }
+
+    .sidebar-profile {
+      @include font-Roboto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 60px;
+      margin-bottom: 11px;
+      cursor: pointer;
+      &:hover {
+        background: $sidebar-profile-hover-color;
+      }
+
+      .sidebar-profile-tablet {
+        width: 28px;
+        height: 28px;
+        background: $app-red-color;
+        border-radius: 50%;
+        margin-left: -8px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        .sidebar-profile-tablet-text {
+          font-size: 12px;
+          color: $light-background-color;
+          font-weight: bold;
+          display: block;
+          margin-top: -2px;
+        }
+      }
+
+      .sidebar-profile-left-icon {
+        height: 60px;
+        width: 4px;
+        visibility: hidden;
+        padding-right: 22px;
+        background: url(/assets/svg/profile_mark.svg) no-repeat left;
+      }
+
+      .sidebar-profile-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .sidebar-profile-name {
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 16px;
+          color: $light-background-color;
+          margin-bottom: 5px;
+        }
+
+        .sidebar-profile-email {
+          font-weight: normal;
+          font-size: 10px;
+          line-height: 12px;
+          color: $profile-email-color;
+        }
+
+        .sidebar-profile-goto {
+          margin-right: 23px;
+          color: $profile-email-color;
+          transform: rotate(-180deg);
+        }
+      }
+
+      .sidebar-profile-block {
+        position: absolute;
+        width: 186px;
+        height: 170px;
+        left: 93%;
+        background: $light-background-color;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+        display: none;
+
+        .sidebar-profile-block-item {
+          position: relative;
+          height: 55px;
+          text-indent: 25px;
+          &:last-child {
+            height: 60px;
+            border-top: 1px solid $table-nested-element-line-color;
+          }
+
+          .sidebar-profile-block-item-decoration {
+            @include font-Roboto;
+            position: relative;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 100%;
+            text-decoration: none;
+            color: $black-color;
+            top: 30%;
+            cursor: pointer;
+          }
+
+          &:hover {
+            background: $menu-on-hover-color;
+          }
+        }
+      }
+
+      &:hover {
+        .sidebar-profile-left-icon {
+          visibility: visible;
+        }
+        .sidebar-profile-block {
+          display: block;
+          bottom: 1.5vh;
+          z-index: 2;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  .sidebar {
+    .sidebar-content {
+      .sidebar-logo {
+        .sidebar-logo-button {
+          display: block;
+        }
+        .logo,
+        .name-pts {
+          display: none;
+        }
+        .sidebar-opened {
+          display: block;
+        }
+      }
+      .search-frame,
+      .hide-search{
+        display: none;
+      }
+      .search-frame-hide {
+        display: block;
+      }
+      .hide-search {
+        display: none;
+      }
+      .sidebar-opened {
+        display: block;
+      }
+      .sidebar-menu-list {
+        .sidebar-menu-item {
+          .sidebar-menu-title {
+            display: none;
+          }
+          .sidebar-opened {
+            display: block;
+          }
+        }
+      }
+
+      .sidebar-profile {
+        .sidebar-profile-tablet {
+          display: flex;
+        }
+        .sidebar-profile-tablet-hide {
+          display: none;
+        }
+        .sidebar-profile-content {
+          display: none;
+        }
+        .sidebar-opened {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .sidebar {
+    .sidebar-content {
+      .sidebar-logo {
+        display: none;
+      }
+      .sidebar-profile {
+        .sidebar-profile-block {
+          left: 40px;
+        }
+      }
+    }
+  }
+}

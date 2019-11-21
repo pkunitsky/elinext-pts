@@ -1,0 +1,121 @@
+@import '../../../../shared/styles/config';
+
+.header-title {
+  width: 100%;
+  font-family: Sifonn;
+  font-size: 21px;
+  line-height: 21px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-top: 7px;
+  white-space: nowrap;
+
+  .name-wrapper {
+    display: inline-flex;
+    flex-wrap: nowrap;
+
+    @media screen and (max-width: 700px) {
+      flex-wrap: wrap;
+    }
+
+    .name-item {
+      display: flex;
+
+      .header-title-back-arrow {
+        cursor: pointer;
+        background: url(/assets/svg/back_stage_arrow.svg) no-repeat center;
+        width: 16px;
+        height: 15px;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .title-wrapper-1 {
+        @include ellipsis-title;
+        max-width: calc(100vw - 660px);
+        @media screen and (max-width: 1000px) and (min-width: 769px) {
+          max-width: calc(100vw - 340px);
+        }
+        @media screen and (max-width: 768px) and (min-width: 577px) {
+          max-width: calc(100vw - 210px);
+        }
+        @media screen and (max-width: 576px) {
+          max-width: calc(100vw - 140px);
+        }
+      }
+
+      .title-wrapper-2 {
+        @include ellipsis-title;
+        max-width: calc((100vw - 750px) / 2);
+        @media screen and (max-width: 1200px) and (min-width: 769px) {
+          max-width: calc((100vw - 420px) / 2);
+        }
+        @media screen and (max-width: 768px) and (min-width: 577px) {
+          max-width: calc((100vw - 300px) / 2);
+        }
+        @media screen and (max-width: 576px){
+          max-width: calc(100vw - 140px);
+        }
+      }
+
+      .title-wrapper-3 {
+         @include ellipsis-title;
+         max-width: calc((100vw - 960px) / 2);
+        @media screen and (max-width: 1200px) and (min-width: 769px) {
+          max-width: calc((100vw - 560px) / 2);
+        }
+        @media screen and (max-width: 768px) and (min-width: 577px) {
+          max-width: calc((100vw - 440px) / 2);
+        }
+        @media screen and (max-width: 576px){
+          max-width: calc(100vw - 140px);
+        }
+       }
+
+      .title-wrapper-4 {
+        @include ellipsis-title;
+        max-width: calc((100vw - 1020px) / 2);
+        @media screen and (max-width: 1300px) and (min-width: 769px) {
+          max-width: calc((100vw - 630px) / 2);
+        }
+        @media screen and (max-width: 768px) and (min-width: 700px) {
+          max-width: calc((100vw - 500px) / 2);
+        }
+        @media screen and (max-width: 699px) and (min-width: 577px){
+          max-width: calc(100vw - 250px);
+        }
+        @media screen and (max-width: 576px){
+          max-width: calc(100vw - 140px);
+        }
+
+        .header-title-name {
+          color: $filter-value-color;
+        }
+      }
+
+      .header-title-code {
+        color: $header-code-color;
+        margin-right: 10px;
+      }
+
+      .header-title-ellipsis {
+        color: $filter-value-color;
+        font-family: Sifonn;
+        font-size: 21px;
+        line-height: 21px;
+      }
+
+      .title-divider {
+        display: inline-block;
+        width: 30px;
+        height: 20px;
+        background: url(/assets/svg/arrow_right.svg) no-repeat center;
+      }
+    }
+  }
+}
+
+::ng-deep{
+  .tooltip {
+    font-size: 14px;
+  }
+}

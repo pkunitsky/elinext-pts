@@ -1,0 +1,16 @@
+<button
+  *ngIf="basicButton"
+  mat-button
+  class="mat-button"
+  (click)="onClick()"
+>{{label}}</button>
+
+
+<div
+  *ngIf="!basicButton"
+  class="button button-main"
+  (click)="onClick()"
+  [ngStyle]="{'width.px': width}"
+>
+  <span class="button-text">{{label}}</span>
+</div>

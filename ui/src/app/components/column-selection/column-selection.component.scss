@@ -1,0 +1,27 @@
+.column-selection {
+  padding: 18px 22px;
+  min-width: 150px;
+}
+
+.option {
+  background: url(/assets/svg/checkbox_checked.svg) no-repeat left;
+  padding: 10px 0;
+  text-align: left;
+  cursor: pointer;
+  .option-text {
+    padding-left: 34px;
+  }
+}
+
+.option-selected {
+  background: url(/assets/svg/checkbox_checked.svg) no-repeat left;
+}
+
+.option-unchecked {
+  background: url(/assets/svg/check_box.svg) no-repeat left;
+}
+
+.option-disabled {
+  background: url(/assets/svg/checkbox_disabled.svg) no-repeat left;
+  cursor: default;
+}

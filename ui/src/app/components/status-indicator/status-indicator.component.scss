@@ -1,0 +1,16 @@
+@import '../../shared/styles/config';
+
+.container {
+  @include info-container;
+  .status-indicator {
+    @include info-text;
+    span {
+      border-radius: 24px;
+      padding: 0 6px 2px;
+      color: $light-background-color;
+    }
+  }
+  .header-info-divider {
+    @include dot-divider;
+  }
+}

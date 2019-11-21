@@ -1,0 +1,127 @@
+<div class="header-container">
+
+  <!-- First row -->
+  <div class="header-row">
+    <!-- Title -->
+
+    <pts-title
+      [project]="instance"
+      (toBack)="onBackArrowClick()"
+    ></pts-title>
+
+    <!-- Buttons -->
+    <div class="action-buttons">
+
+      <pts-button
+        [label]="'CHANGES LOG'"
+        (clickEvent)="onChangeLogClick()"
+        [basicButton]="true"
+      ></pts-button>
+
+      <pts-button
+        [label]="'ARCHIVE'"
+        (clickEvent)="onArchiveClick()"
+        [basicButton]="true"
+      ></pts-button>
+
+      <pts-button
+        [label]="'EDIT'"
+        (clickEvent)="onEditClick()"
+      ></pts-button>
+
+    </div>
+
+  </div>
+
+  <div class="header-row-info">
+
+    <!-- Status -->
+    <pts-status-indicator
+      *ngIf="instance?.status"
+      [status]="instance?.status"
+    ></pts-status-indicator>
+
+    <!-- Info -->
+    <pts-additional-info
+      *ngFor="let item of getAdditionalInfoItems(), index as i"
+      [field]="item"
+      [value]="instance[item]"
+      [users]="users"
+      [lastItem]="getAdditionalInfoItems().length === i + 1"
+    ></pts-additional-info>
+
+  </div>
+
+  <div class="header-divider"></div>
+
+  <!-- Description -->
+  <div
+    [ngClass]="isDescriptionShown ? 'description-visible' : 'description-hidden'"
+    class="header-description"
+  >
+    <span class="info-main">{{instance?.description}}</span>
+  </div>
+
+  <!-- Description toggle -->
+  <div
+    class="description-toggle"
+    [ngClass]="isDescriptionShown ? 'description-expanded' : ''"
+    (click)="toggleDescription()"
+  >
+    <span>{{isDescriptionShown ? 'Hide' : 'Show'}} description</span>
+  </div>
+
+  <div class="header-divider"></div>
+
+  <!-- Bottom row -->
+  <div class="second-header-row">
+
+    <div class="section-name">
+      <span>{{getSectionName()}}</span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="inline-buttons">
+
+      <pts-button
+        *ngIf="selected?.length"
+        [label]="'MOVE'"
+        [basicButton]="true"
+        (clickEvent)="onMoveClick()"
+      ></pts-button>
+
+      <pts-button
+        *ngIf="selected?.length && isProjectTasksRoute()"
+        [label]="'JOIN IN FEATURE'"
+        [basicButton]="true"
+        (clickEvent)="onJoinInFeature()"
+      ></pts-button>
+
+      <pts-button
+        *ngIf="selected?.length"
+        [label]="'ARCHIVE'"
+        [basicButton]="true"
+        (clickEvent)="onArchiveSelectedClick()"
+      ></pts-button>
+
+      <pts-button
+        *ngIf="isCreateTaskVisible()"
+        [label]="'CREATE TASK'"
+        (clickEvent)="onCreateTaskClick()"
+        width="200"
+        class="create-buttons"
+      ></pts-button>
+
+      <pts-button
+        *ngIf="!isProjectTasksRoute()"
+        [label]="'CREATE SUBPROJECT'"
+        (clickEvent)="onCreateSubProjectClick()"
+        width="200"
+        class="create-buttons"
+      ></pts-button>
+
+    </div>
+
+  </div>
+
+</div>

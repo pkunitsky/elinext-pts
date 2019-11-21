@@ -1,0 +1,87 @@
+@import '../../../shared/styles/config';
+
+.dialog-title {
+  @include modal-title;
+}
+
+.inline-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.mat-button {
+  @include modals-button;
+}
+
+.changes-log-container {
+  margin: 0 30px 20px;
+  @include font-Roboto;
+
+  .log-line {
+    white-space: nowrap;
+    margin-bottom: -5px;
+
+
+    .log-line-decoration {
+      display: inline-block;
+      width: 40px;
+      min-height: 16px;
+      background: url(/assets/svg/ch_start.svg) no-repeat top, url(/assets/svg/ch_log_way.svg) no-repeat center;
+    }
+
+    .log-date {
+      display: inline-block;
+      width: 60px;
+      padding-top: 2px;
+      font-size: 10px;
+      line-height: 12px;
+      white-space: normal;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    .log-info {
+      display: inline-flex;
+      flex-direction: column;
+      align-content: flex-start;
+      width: calc(100% - 90px);
+      vertical-align: top;
+      padding-bottom: 20px;
+
+      .log-author-row {
+        padding-bottom: 10px;
+
+        .log-author {
+          color: $app-red-color;
+          font-size: 16px;
+          line-height: 19px;
+          font-weight: bold;
+        }
+      }
+
+      .log-value {
+        white-space: normal;
+        margin-right: 5px;
+        font-size: 14px;
+        line-height: 16px;
+        color: $black-color;
+        padding-bottom: 5px;
+
+        .field-name {
+          font-weight: bold;
+        }
+        .field-value {
+          letter-spacing: 0.01em;
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 577px) {
+  .changes-log-container {
+    margin: 0 0 5px;
+  }
+}

@@ -1,0 +1,174 @@
+<table
+  cdk-table
+  [dataSource]="tableSource"
+  class="app-table alternate-theme"
+  *ngIf="tableSource"
+>
+
+  <!-- Checkbox Column -->
+  <ng-container cdkColumnDef="select">
+    <th
+      cdk-header-cell
+      *cdkHeaderCellDef
+      class="table-header-select"
+      (click)="masterToggle()"
+    >
+      <div
+        class="table-checkbox"
+        [ngClass]="isAllSelected() ? 'checkbox-checked' : 'checkbox-unchecked'"
+      ></div>
+    </th>
+    <td
+      cdk-cell
+      *cdkCellDef="let row"
+      class="app-table-cell"
+      (click)="$event.stopPropagation(); rowSelectionChanged(row)"
+    >
+      <div
+        class="table-checkbox"
+        [ngClass]="selection.isSelected(row) ? 'checkbox-checked' : 'checkbox-unchecked'"
+      ></div>
+    </td>
+  </ng-container>
+
+  <!-- Columns -->
+  <ng-container
+    [cdkColumnDef]="column"
+    *ngFor="let column of tableDataColumns; trackBy: trackByFn"
+  >
+    <!-- Table Header -->
+    <th
+      cdk-header-cell
+      *cdkHeaderCellDef
+      class="table-header-cell"
+    >
+      <!-- Columns titles -->
+      <div
+        class="table-header-title"
+        ptsTableSortColumn
+        [column]="column"
+        (click)="sortTable(column)"
+      >
+        <span class="table-header-title-item">{{getTitleTextNode(column)}}</span>
+
+        <div class="table-header-title-item">
+          <div class="up-arrow"></div>
+          <div class="down-arrow"></div>
+        </div>
+      </div>
+
+      <!-- Columns filters -->
+      <div class="table-header-filter-container">
+
+        <div *ngIf="isContainFilter(column)">
+          <input
+            type="search"
+            class="table-header-filter input-border"
+            name={{column}}
+          >
+        </div>
+
+        <div *ngIf="isOptionFilter(column)">
+          <select class="table-header-filter select-filter">
+            <option
+              *ngFor="let option of getFilterOptions(column)"
+              value={{option}}
+            >{{option}}</option>
+          </select>
+        </div>
+
+        <div
+          *ngIf="isDateFilter(column)"
+          class="table-header-filter-date"
+        >
+          <input
+            type="text"
+            class="table-header-filter-date-field input-border"
+            [name]="column"
+            [matDatepicker]="picker"
+            placeholder="DD/MM/YYYY"
+          >
+          <mat-datepicker #picker></mat-datepicker>
+          <div
+            class="table-header-filter-date-icon"
+            (click)="picker.open()"
+          ></div>
+        </div>
+      </div>
+    </th>
+
+    <!-- Table Data -->
+    <td
+      cdk-cell
+      *cdkCellDef="let element"
+      class="table-data-cell"
+      ptsRowHeight
+      [element]="element"
+      [column]="column"
+      ptsTooltip
+      [tooltip]="tooltip"
+    >
+      <div
+        matTooltip="{{element[column]}}"
+        #tooltip="matTooltip"
+        matTooltipPosition="above"
+        matTooltipClass="table-tooltip"
+      ></div>
+      <span
+        *ngIf="showNestedItems || isTaskIsTypeOfData()"
+        ptsNestedRow
+        [column]="column"
+        [element]="element"
+      ></span>
+      <span
+        *ngIf="isTaskIsTypeOfData() && column === 'name' && element.subtasks.length"
+        class="table-feature"
+      >[Feature]</span>
+      <span
+        ptsStatusColor
+        [column]="column"
+        [element]="element"
+      >{{getTextNode(column, element)}}</span>
+    </td>
+
+  </ng-container>
+
+  <!-- Settings Icon -->
+  <ng-container cdkColumnDef="settings">
+    <th
+      cdk-header-cell
+      *cdkHeaderCellDef
+      class="table-header-settings"
+    >
+      <div
+        (click)="onSettingsClick()"
+        class="table-settings-icon"
+        ptsSettingsIcon [isOpen]="trigger?.menuOpen"
+        #settingsElement
+      ></div>
+    </th>
+    <td
+      cdk-cell
+      *cdkCellDef="let element"
+    >
+      <div class="table-row-actions">
+        <div class="table-back-icon" (click)="onMoveClick($event)"></div>
+        <div class="table-recycler-icon" (click)="onDeleteIconClick($event, element)"></div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr
+    cdk-header-row
+    *cdkHeaderRowDef="tableColumns; sticky: true"
+    class="table-header-row"
+  ></tr>
+  <tr
+    cdk-row
+    *cdkRowDef="let row; columns: tableColumns;"
+    (click)="selectRow(row)"
+    class="app-table-row"
+    [ngClass]="{'table-row-selected': selection.isSelected(row)}"
+  ></tr>
+
+</table>

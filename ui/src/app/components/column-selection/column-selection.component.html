@@ -1,0 +1,14 @@
+<div
+  class="column-selection"
+  (click)="$event.stopPropagation()"
+>
+  <div
+    *ngFor="let option of options"
+    (click)="onSelectionChange(option)"
+    [ngClass]="setCssClass(option)"
+>
+  <span class="option-text">
+    {{getOption(option)}}
+  </span>
+</div>
+</div>

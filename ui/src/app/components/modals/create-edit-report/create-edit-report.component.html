@@ -1,0 +1,135 @@
+<div class="dialog-title">
+  <span>{{isEditType() ? 'Edit report' : 'Add report'}}</span>
+</div>
+
+<div class="dialog-body">
+
+  <form [formGroup]="form" novalidate>
+
+    <div class="inline-container">
+
+      <!-- Report Date field -->
+      <div
+        class="float-container select-container"
+        ptsFloatLabel
+        [ngClass]="reportedDate.value ? 'active' : ''"
+      >
+        <label for="reportedDateField">Report date</label>
+        <mat-datepicker #reportedDatePicker></mat-datepicker>
+        <div
+          class="date-icon"
+          (click)="reportedDatePicker.open()"
+        ></div>
+        <input
+          type="text"
+          name="reportedDate"
+          formControlName="reportedDate"
+          id="reportedDateField"
+          [matDatepicker]="reportedDatePicker"
+          (dateChange)="checkValue($event)"
+        >
+      </div>
+
+      <!-- Hours field -->
+      <div
+        class="float-container select-container"
+        ptsFloatLabel
+        [ngClass]="hours.value ? 'active' : ''"
+      >
+        <label for="hoursField">Hours</label>
+        <input
+          type="text"
+          name="hours"
+          formControlName="hours"
+          id="hoursField"
+        >
+      </div>
+    </div>
+
+    <!-- Report text -->
+    <div
+      class="float-container textarea-container"
+      ptsFloatLabel
+      [ngClass]="comment.value ? 'active' : ''"
+    >
+      <label for="commentField">Report text</label>
+      <textarea
+        type="text"
+        name="comment"
+        formControlName="comment"
+        id="commentField"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Advanced settings toggle -->
+    <div
+      class="advanced-settings"
+      [ngClass]="isAdvancedSettingsShown ? 'advanced-settings-expanded' : ''"
+      (click)="toggleAdvancedSettings()"
+    >
+      <span>Advanced settings</span>
+    </div>
+
+    <!-- Advanced settings -->
+    <div [ngClass]="isAdvancedSettingsShown ? 'advanced-visible' : 'advanced-hidden'">
+
+      <div class="inline-container">
+
+        <!-- Percentage field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="percentage.value ? 'active' : ''"
+        >
+          <label for="percentageField">Percentage completed</label>
+          <input
+            type="text"
+            name="percentage"
+            formControlName="percentage"
+            id="percentageField"
+          >
+        </div>
+
+        <!-- Hours field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="taskStatus.value ? 'active' : ''"
+        >
+          <label for="taskStatusField">Report status</label>
+          <select
+            class="select-field"
+            name="taskStatus"
+            formControlName="taskStatus"
+            id="taskStatusField"
+          >
+            <option
+              *ngFor="let option of statusTypes"
+              [value]="option"
+            >{{option}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- Action buttons -->
+  <div class="inline-buttons">
+
+    <button
+      mat-button
+      class="mat-button"
+      [mat-dialog-close]="false"
+    >CANCEL</button>
+
+    <button
+      mat-button
+      class="mat-button"
+      [disabled]="getDisabledStatus()"
+      [mat-dialog-close]="getReport()"
+    >{{isEditType() ? 'EDIT REPORT' : 'ADD REPORT'}}</button>
+
+  </div>
+</div>

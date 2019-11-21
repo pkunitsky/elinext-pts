@@ -1,0 +1,344 @@
+<div class="dialog-title">
+  <span>{{getTitleText()}}</span>
+</div>
+
+<div class="dialog-body">
+
+  <form [formGroup]="form" novalidate>
+
+    <!-- Name field -->
+    <div
+      class="float-container"
+      ptsFloatLabel
+      [ngClass]="name.value ? 'active' : ''"
+    >
+      <label for="nameField">Name</label>
+      <input
+        type="text"
+        name="name"
+        formControlName="name"
+        id="nameField"
+        required
+      >
+    </div>
+
+    <!-- Advanced settings toggle -->
+    <div
+      class="advanced-settings"
+      [ngClass]="isAdvancedSettingsShown ? 'advanced-settings-expanded' : ''"
+      (click)="toggleAdvancedSettings()"
+    >
+      <span>Advanced settings</span>
+    </div>
+
+    <!-- Advanced settings -->
+    <div [ngClass]="getAdvancedSettingsCssClass()">
+
+      <!-- Lead field -->
+      <div
+        *ngIf="!isTaskModal()"
+        class="float-container"
+        ptsFloatLabel
+        [ngClass]="lead.value ? 'active' : ''"
+      >
+        <label for="leadField">{{getTypeText()}} Lead</label>
+        <select
+          class="select-field"
+          name="projectLeadEmail"
+          formControlName="projectLeadEmail"
+          id="leadField"
+        >
+          <option
+            *ngFor="let option of data.managers"
+            [value]="option"
+          >{{getUserOption(option)}}</option>
+        </select>
+      </div>
+
+      <!-- Priority field -->
+      <div
+        *ngIf="isTaskModal()"
+        class="float-container"
+        ptsFloatLabel
+        [ngClass]="priority.value ? 'active' : ''"
+      >
+        <label for="priorityField">Priority</label>
+        <select
+          class="select-field"
+          name="priority"
+          formControlName="priority"
+          id="priorityField"
+        >
+          <option
+            *ngFor="let option of priorityTypes"
+            [value]="option"
+          >{{option}}</option>
+        </select>
+      </div>
+
+      <!-- Assigned to field -->
+      <div
+        *ngIf="isTaskModal()"
+        class="float-container"
+        ptsFloatLabel
+        [ngClass]="assigneeEmail.value ? 'active' : ''"
+      >
+        <label for="assigneeEmailField">Assigned to</label>
+        <select
+          class="select-field"
+          name="assigneeEmail"
+          formControlName="assigneeEmail"
+          id="assigneeEmailField"
+        >
+          <option
+            *ngFor="let option of data.users"
+            [value]="option.email"
+          >{{getUserOption(option.email)}}</option>
+        </select>
+      </div>
+
+
+      <!-- Date fields -->
+      <div class="inline-container">
+
+        <!-- Start Date field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="startDate.value ? 'active' : ''"
+        >
+          <label for="startDateField">Start date</label>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+          <div
+            class="date-icon"
+            (click)="startDatePicker.open()"
+          ></div>
+          <input
+            type="text"
+            name="startDate"
+            formControlName="startDate"
+            id="startDateField"
+            [matDatepicker]="startDatePicker"
+            (dateChange)="checkValue($event)"
+          >
+        </div>
+
+        <!-- Deadline field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="deadline.value ? 'active' : ''"
+        >
+          <label for="deadlineField">Deadline</label>
+          <mat-datepicker #deadlinePicker></mat-datepicker>
+          <div
+            class="date-icon"
+            (click)="deadlinePicker.open()"
+          ></div>
+          <input
+            type="text"
+            name="deadline"
+            formControlName="deadline"
+            id="deadlineField"
+            [matDatepicker]="deadlinePicker"
+            (dateChange)="checkValue($event)"
+          >
+        </div>
+      </div>
+
+      <!-- Customer and groupName fields -->
+      <div
+        *ngIf="!isTaskModal()"
+        class="inline-container"
+      >
+
+        <!-- GroupName field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="groupName.value ? 'active' : ''"
+        >
+          <label for="groupNameField">Group</label>
+          <select
+            class="select-field"
+            name="groupName"
+            formControlName="groupName"
+            id="groupNameField"
+          >
+            <option
+              *ngFor="let option of data.groups"
+              [value]="option"
+            >{{option}}</option>
+          </select>
+        </div>
+
+        <!-- Customer field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="customer.value ? 'active' : ''"
+        >
+          <label for="customerField">Customer</label>
+          <input
+            type="text"
+            name="customer"
+            formControlName="customer"
+            id="customerField"
+          >
+        </div>
+
+      </div>
+
+      <!-- Estimated time and percentage fields -->
+      <div
+        *ngIf="isTaskModal()"
+        class="inline-container"
+      >
+
+        <!-- EstimatedTime field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="estimatedTime.value ? 'active' : ''"
+        >
+          <label for="estimatedTimeField">Estimated time</label>
+          <input
+            type="text"
+            name="estimatedTime"
+            formControlName="estimatedTime"
+            id="estimatedTimeField"
+          >
+        </div>
+
+        <!-- Percentage field -->
+        <div
+          class="float-container select-container"
+          ptsFloatLabel
+          [ngClass]="percentage.value ? 'active' : ''"
+        >
+          <label for="percentageField">Percentage</label>
+          <input
+            type="text"
+            name="percentage"
+            formControlName="percentage"
+            id="percentageField"
+          >
+        </div>
+      </div>
+
+      <!-- ManagerEmail field -->
+      <div
+        *ngIf="!isTaskModal()"
+        class="float-container"
+        ptsFloatLabel
+        [ngClass]="managerEmail.value ? 'active' : ''"
+      >
+        <label for="managerEmailField">{{getTypeText()}} manager</label>
+        <select
+          class="select-field"
+          name="managerEmail"
+          formControlName="managerEmail"
+          id="managerEmailField"
+        >
+          <option
+            *ngFor="let option of data.managers"
+            [value]="option"
+          >{{getUserOption(option)}}</option>
+        </select>
+      </div>
+
+      <!-- Status field -->
+      <div
+        class="float-container"
+        ptsFloatLabel
+        [ngClass]="status.value ? 'active' : ''"
+      >
+        <label for="statusField">{{getTypeText()}} status</label>
+        <select
+          class="select-field"
+          name="status"
+          formControlName="status"
+          id="statusField"
+        >
+          <option
+            *ngFor="let option of statusTypes"
+            [value]="option"
+          >{{option}}</option>
+        </select>
+      </div>
+
+      <!-- Parent task field -->
+      <div
+        *ngIf="isTaskModal() && !isSubTask()"
+        class="float-container"
+        ptsFloatLabel
+        [ngClass]="parentId.value ? 'active' : ''"
+      >
+        <label for="parentIdField">Parent task</label>
+        <select
+          class="select-field"
+          name="parentId"
+          formControlName="parentId"
+          id="parentIdField"
+        >
+          <option
+            *ngFor="let option of data.tasks"
+            [value]="option"
+          >{{option}}</option>
+        </select>
+      </div>
+
+      <!-- Description field -->
+      <div
+        class="float-container textarea-container"
+        ptsFloatLabel
+        [ngClass]="description.value ? 'active' : ''"
+      >
+        <label for="descriptionField">Description</label>
+        <textarea
+          type="text"
+          name="description"
+          formControlName="description"
+          id="descriptionField"
+          required
+        ></textarea>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<!-- Action buttons -->
+<div class="inline-buttons">
+
+  <button
+    mat-button
+    class="mat-button"
+    [mat-dialog-close]="false"
+  >CANCEL
+  </button>
+
+  <button
+    *ngIf="isEditModal()"
+    mat-button
+    class="mat-button"
+    [mat-dialog-close]="data.instance.id"
+  >ARCHIVE
+  </button>
+
+  <button
+    *ngIf="isTaskEdit()"
+    mat-button
+    class="mat-button"
+    [mat-dialog-close]="data.instance.id"
+  >ARCHIVE
+  </button>
+
+  <button
+    mat-button
+    class="mat-button"
+    [disabled]="getDisabledStatus()"
+    [mat-dialog-close]="getProject()"
+  >{{getButtonText()}}</button>
+
+</div>

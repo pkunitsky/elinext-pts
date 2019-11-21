@@ -1,0 +1,35 @@
+@import '../../../shared/styles/config';
+
+.dialog-title {
+  @include modal-title;
+}
+
+.dialog-body {
+  @include modal-body;
+}
+
+.inline-buttons {
+  @include action-buttons;
+}
+
+.mat-button {
+  @include modals-button;
+}
+
+.dialog-select {
+  @include font-Roboto;
+  width: 100%;
+  max-width: 400px;
+  height: 44px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+.select {
+  background: url(/assets/svg/select_arrow.svg) no-repeat center;
+  background-position-x: calc(100% - 17px);
+  -webkit-appearance: none;
+  padding: 0 5px;
+}

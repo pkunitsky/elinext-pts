@@ -1,0 +1,132 @@
+$light-background-color: #FFFFFF;
+$table-nested-element-line-color: #DFDFDF;
+$app-red-color: #EF0D33;
+$mat-custom-contrast-color: #DADADA;
+$filter-border-color: #E1E1E1;
+$filter-value-color: #2C333F;
+$border-color: #B7B7B7;
+$header-code-color: #ACB2BC;
+$body-background-color: #F2F2F2;
+$logo-name-color: rgba(255, 255, 255, 0.4);
+$search-input-border: rgba(151, 163, 180, 0.3);
+$search-input-placeholder: rgba(0, 0, 0, 0.31);
+$menu-on-hover-color: #F2C94C;
+$profile-email-color: #ACACAC;
+$black-color: #000000;
+$sidebar-profile-hover-color: #373d49;
+
+@font-face {
+  font-family: 'Sifonn Pro';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Sifonn Pro'), url(/assets/fonts/SIFONN_PRO.ttf);
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Roboto black'), url(/assets/fonts/Roboto-Light.ttf);
+}
+
+@mixin sorting-icons {
+  height: 7px;
+  width: 7px;
+  cursor: pointer;
+  display: block;
+}
+
+@mixin action-row-icons {
+  height: 13px;
+  width: 13px;
+  cursor: pointer;
+}
+
+@mixin settings-icon {
+  width: 80px;
+  height: 70px;
+  margin: 0 0 0 auto;
+}
+
+@mixin action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+@mixin modals-button {
+  font-family: "Sifonn Pro";
+  font-size: 14px;
+  letter-spacing: 0.75px;
+  color: $app-red-color;
+}
+
+@mixin font-Roboto {
+  font-family: Roboto;
+  font-style: normal;
+}
+
+@mixin modal-title {
+  @include font-Roboto;
+  padding: 14px 17px 26px 17px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.15px;
+}
+
+@mixin modal-body {
+  @include font-Roboto;
+  padding: 0 14px 17px 14px;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+@mixin floating-label {
+  border: none;
+  font-size: 14px;
+  outline: 0;
+  width: 100%;
+  padding: 17px 0 11px;
+}
+
+@mixin button-text {
+  position: relative;
+  text-align: center;
+  top: 10px;
+}
+
+@mixin advanced-settings-block {
+  opacity: 1;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+@mixin dot-divider {
+  width: 3px;
+  height: 3px;
+  background: url(/assets/svg/dot_divider.svg) no-repeat center;
+}
+
+@mixin info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 15px;
+}
+
+@mixin info-text {
+  @include font-Roboto;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  margin: 5px 15px 5px 0;
+}
+
+@mixin ellipsis-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
